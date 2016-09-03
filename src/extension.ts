@@ -4,16 +4,18 @@ import * as vscode from 'vscode';
 import * as rainbow from './rainbow';
 
 export function activate(context: vscode.ExtensionContext) {
-    let editor = vscode.window.activeTextEditor;
-    if (editor) {
+    let runRainbow = (editor) => {
         rainbow.rainbow(editor);
-    }
-    vscode.window.onDidChangeActiveTextEditor(function (editor) {
-        if (editor) {
-            rainbow.rainbow(editor);
-        }
+    };
+    
+    let editor = vscode.window.activeTextEditor;
+    runRainbow(editor);
+
+    vscode.window.onDidChangeActiveTextEditor((editor) => {
+        runRainbow(editor);
     }, null, context.subscriptions);
-    vscode.workspace.onDidChangeTextDocument(function (event) {
+
+    vscode.workspace.onDidChangeTextDocument((event) => {
         if (editor && event.document === editor.document) {
             rainbow.rainbow(editor);
         }
