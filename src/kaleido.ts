@@ -3,7 +3,7 @@ import * as encode from './encode';
 import * as color from './color';
 
 // http://blog.ostermiller.org/find-comment
-export let singleQuote = "'\\w*'";
+export let singleQuote = "'(\\w|\\.|/)*'";
 export let doubleQuote = "\".*\"";
 
 export let hsStyleLineComment = "-[-]+.*";
@@ -41,7 +41,7 @@ export function kaleido(editor: vscode.TextEditor) {
 
     for (var c in color.kaleidoDecoTypes) {
         decorationCache[c] = [];
-    }
+    };
 
     var text = editor.document.getText();
     while (ignoreMatch = ignoreRegex.exec(text)) {
@@ -70,4 +70,6 @@ export function kaleido(editor: vscode.TextEditor) {
     for (var index in color.kaleidoDecoTypes) {
         editor.setDecorations(color.kaleidoDecoTypes[index], decorationCache[index]);
     }
+
+    return;
 }

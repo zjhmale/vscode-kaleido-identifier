@@ -7,7 +7,7 @@ suite("Extension Tests", () => {
     test("quote regex", () => {
         let single = new RegExp(kaleido.singleQuote, "g");
         let double = new RegExp(kaleido.doubleQuote, "g");
-        assert.equal(single.exec("'cleantha'")[0], "'cleantha'");
+        assert.equal(single.exec("'./cleantha'")[0], "'./cleantha'");
         assert.equal(double.exec("\"cleantha\"")[0], "\"cleantha\"");
     });
     test("hs style comment regex", () => {
