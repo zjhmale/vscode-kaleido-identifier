@@ -3,7 +3,7 @@ import * as encode from './encode';
 import * as color from './color';
 
 // http://blog.ostermiller.org/find-comment
-export let singleQuote = "'(\\w|\\.|/)*'";
+export let singleQuote = "'.*'";
 export let doubleQuote = "\".*\"";
 
 export let hsStyleLineComment = "-[-]+.*";
@@ -15,8 +15,7 @@ export let mlStyleComment = "\\(\\*(.|[\\r\\n]|)*\\*\\)";
 export let cStyleLineComment = "\\/[-\\/]+.*";
 export let cStyleMultiComment = "\\/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*\\/";
 
-let ignoreRegexStr = [
-    singleQuote,
+let ignoreRegexs = [
     doubleQuote,
     hsStyleLineComment,
     hsStyleMultiComment,
@@ -24,13 +23,16 @@ let ignoreRegexStr = [
     mlStyleComment,
     cStyleLineComment,
     cStyleMultiComment
-].join("|");
+];
 
-let ignoreRegex = new RegExp(ignoreRegexStr, "g");
+let ignoreRegex = new RegExp(ignoreRegexs.join("|"), "g");
+let ignoreRegexSQ = new RegExp([singleQuote].concat(ignoreRegexs).join("|"), "g");
 var ignoreMatch;
 
 let identRegex = /[a-zA-Z0-9_][a-zA-Z0-9_-]*/g;
 var identMatch;
+
+let jsLangs = ["typescript", "json", "javascript", "coffeescript"];
 
 export function kaleido(editor: vscode.TextEditor) {
     if (!editor) {
@@ -44,7 +46,10 @@ export function kaleido(editor: vscode.TextEditor) {
     };
 
     var text = editor.document.getText();
-    while (ignoreMatch = ignoreRegex.exec(text)) {
+
+    let regex = jsLangs.indexOf(editor.document.languageId) > -1 ? ignoreRegexSQ : ignoreRegex;
+
+    while (ignoreMatch = regex.exec(text)) {
         let ignore = ignoreMatch[0];
         let start = ignoreMatch.index;
         let end = start + ignore.length;
@@ -57,11 +62,9 @@ export function kaleido(editor: vscode.TextEditor) {
 
     while (identMatch = identRegex.exec(text)) {
         let ident = identMatch[0];
-        let s = identMatch.index;
-        let e = identMatch.index + ident.length;
                 
-        let startPos = editor.document.positionAt(s);
-        let endPos = editor.document.positionAt(e);
+        let startPos = editor.document.positionAt(identMatch.index);
+        let endPos = editor.document.positionAt(identMatch.index + ident.length);
         let decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: null };
         let idx = encode.kaleidoIdentifierHash(ident) % color.kaleidoDecoTypes.length
         decorationCache[idx].push(decoration);
