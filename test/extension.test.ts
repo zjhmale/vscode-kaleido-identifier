@@ -1,22 +1,25 @@
-//
-// Note: This example test is leveraging the Mocha test framework.
-// Please refer to their documentation on https://mochajs.org/ for help.
-//
-
-// The module 'assert' provides assertion methods from node
 import * as assert from 'assert';
 
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
 import * as vscode from 'vscode';
-import * as myExtension from '../src/extension';
+import * as kaleido from '../src/kaleido';
 
-// Defines a Mocha test suite to group tests of similar kind together
 suite("Extension Tests", () => {
+    test("hs style comment regex", () => {
+        let line = new RegExp(kaleido.hsStyleLineComment, "g");
+        let multi = new RegExp(kaleido.hsStyleMultiComment, "g");
+        assert.equal(line.exec("-- cleantha")[0], "-- cleantha");
+        assert.equal(multi.exec("{-\n Another common multi-line comment style. \n-}")[0], "{-\n Another common multi-line comment style. \n-}");
+    });
 
-    // Defines a Mocha unit test
-    test("Something 1", () => {
-        assert.equal(-1, [1, 2, 3].indexOf(5));
-        assert.equal(-1, [1, 2, 3].indexOf(0));
+    test("ml style comment regex", () => {
+        let r = new RegExp(kaleido.mlStyleComment, "g");
+        assert.equal(r.exec("(***asdads\n Another common multi-line comment style. \n***)")[0], "(***asdads\n Another common multi-line comment style. \n***)");
+    });
+
+    test("c style comment regex", () => {
+        let line = new RegExp(kaleido.cStyleLineComment, "g");
+        let multi = new RegExp(kaleido.cStyleMultiComment, "g");
+        assert.equal(line.exec("// cleantha")[0], "// cleantha");
+        assert.equal(multi.exec("/****\n* Another common multi-line comment style. \n*/")[0], "/****\n* Another common multi-line comment style. \n*/");
     });
 });

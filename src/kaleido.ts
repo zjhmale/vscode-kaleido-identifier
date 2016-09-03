@@ -2,6 +2,14 @@ import * as vscode from 'vscode';
 import * as encode from './encode';
 import * as color from './color';
 
+export let hsStyleLineComment = "-[-]+.*";
+export let hsStyleMultiComment = "{-(.|[\\r\\n]|)*-}";
+
+export let mlStyleComment = "\\(\\*(.|[\\r\\n]|)*\\*\\)";
+
+export let cStyleLineComment = "\\/[-\\/]+.*";
+export let cStyleMultiComment = "\\/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*\\/";
+
 let regex = /[a-zA-Z0-9_][a-zA-Z0-9_-]*/g;
 var match;
 
