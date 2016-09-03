@@ -6,6 +6,14 @@
     "publisher": "zjhmale",
     "license": "BSD",
     "icon": "images/kaleido.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zjhmale/vscode-kaleido-identifier.git"
+    },
+    "bugs": {
+      "url": "https://github.com/zjhmale/vscode-kaleido-identifier/issues"  
+    },
+    "homepage": "https://github.com/zjhmale/vscode-kaleido-identifier",
     "galleryBanner": {
         "color": "#A2B6DA",
         "theme": "dark"
