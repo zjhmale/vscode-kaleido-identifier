@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-let DARK_COMMON_COLORS = [
+export let DARK_COMMON_COLORS = [
     "#72D572",
     "#C5E1A5",
     "#E6EE9C",
@@ -27,6 +27,15 @@ let DARK_COMMON_COLORS = [
     "#F0F4C3",
     "#FFB74D"
 ]
+
+
+export let kaleidoDecoTypes = [];
+
+for (var idx in DARK_COMMON_COLORS) {
+    kaleidoDecoTypes.push(vscode.window.createTextEditorDecorationType({
+        color: DARK_COMMON_COLORS[idx]
+    }));
+}
 
 export function getAttributesColor(selector: number): vscode.TextEditorDecorationType {
     return vscode.window.createTextEditorDecorationType({

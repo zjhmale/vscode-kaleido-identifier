@@ -5,20 +5,19 @@ import * as rainbow from './rainbow';
 
 export function activate(context: vscode.ExtensionContext) {
     let runRainbow = (editor) => {
-        rainbow.rainbow(editor);
+        if (editor) rainbow.rainbow(editor);
     };
     
-    let editor = vscode.window.activeTextEditor;
-    runRainbow(editor);
+    var _editor = vscode.window.activeTextEditor;
+    runRainbow(_editor);
 
     vscode.window.onDidChangeActiveTextEditor((editor) => {
-        runRainbow(editor);
+        _editor = editor
+        runRainbow(_editor);
     }, null, context.subscriptions);
 
     vscode.workspace.onDidChangeTextDocument((event) => {
-        if (editor && event.document === editor.document) {
-            rainbow.rainbow(editor);
-        }
+        if (_editor && event.document === _editor.document) rainbow.rainbow(_editor);
     }, null, context.subscriptions);
 }
 
