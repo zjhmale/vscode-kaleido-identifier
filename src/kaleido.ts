@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as encode from './encode';
 import * as color from './color';
 
+// http://blog.ostermiller.org/find-comment
 export let singleQuote = "'\\w*'";
 export let doubleQuote = "\".*\"";
 
@@ -47,7 +48,7 @@ export function kaleido(editor: vscode.TextEditor) {
         let ignore = ignoreMatch[0];
         let start = ignoreMatch.index;
         let end = start + ignore.length;
-        ignoreCache.push({start, end});
+        ignoreCache.push({ start, end });
     }
 
     ignoreCache.forEach(ignore => {
