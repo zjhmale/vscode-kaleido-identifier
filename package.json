@@ -1,25 +1,29 @@
 {
-    "name": "vscode-kaleido-identifier",
-    "displayName": "vscode-kaleido-identifier",
-    "description": "Providing highlighting of identifiers based on a hash of its name.",
+    "name": "kaleido-identifier",
+    "displayName": "Kaleido Identifier",
+    "description": "Providing kaleido highlighting for identifiers.",
     "version": "0.0.1",
     "publisher": "zjhmale",
+    "license": "BSD",
+    "icon": "images/kaleido.png",
+    "galleryBanner": {
+        "color": "#A2B6DA",
+        "theme": "dark"
+    },
     "engines": {
         "vscode": "^1.0.0"
     },
     "categories": [
         "Other"
     ],
+    "keywords": [
+        "kaleido",
+        "identifier"
+    ],
     "activationEvents": [
         "*"
     ],
     "main": "./out/src/extension",
-    "contributes": {
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
-    },
     "scripts": {
         "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
         "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
