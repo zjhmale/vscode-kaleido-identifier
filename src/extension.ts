@@ -1,23 +1,23 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import * as rainbow from './rainbow';
+import * as kaleido from './kaleido';
 
 export function activate(context: vscode.ExtensionContext) {
-    let runRainbow = (editor) => {
-        if (editor) rainbow.rainbow(editor);
+    let runKaleido = (editor) => {
+        if (editor) kaleido.kaleido(editor);
     };
     
     var _editor = vscode.window.activeTextEditor;
-    runRainbow(_editor);
+    runKaleido(_editor);
 
     vscode.window.onDidChangeActiveTextEditor((editor) => {
         _editor = editor
-        runRainbow(_editor);
+        runKaleido(_editor);
     }, null, context.subscriptions);
 
     vscode.workspace.onDidChangeTextDocument((event) => {
-        if (_editor && event.document === _editor.document) rainbow.rainbow(_editor);
+        if (_editor && event.document === _editor.document) kaleido.kaleido(_editor);
     }, null, context.subscriptions);
 }
 

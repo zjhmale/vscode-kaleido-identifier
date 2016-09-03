@@ -5,7 +5,7 @@ import * as color from './color';
 let regex = /[a-zA-Z0-9_][a-zA-Z0-9_-]*/g;
 var match;
 
-export function rainbow(editor: vscode.TextEditor) {
+export function kaleido(editor: vscode.TextEditor) {
     if (!editor) {
         return;
     }
@@ -21,7 +21,7 @@ export function rainbow(editor: vscode.TextEditor) {
         let startPos = editor.document.positionAt(match.index);
         let endPos = editor.document.positionAt(match.index + value.length);
         let decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: null };
-        let idx = encode.rainbowIdentifierHash(value) % color.kaleidoDecoTypes.length
+        let idx = encode.kaleidoIdentifierHash(value) % color.kaleidoDecoTypes.length
         decorationCache[idx].push(decoration);
     }
 

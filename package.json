@@ -1,6 +1,6 @@
 {
-    "name": "vscode-rainbow-identifier",
-    "displayName": "vscode-rainbow-identifier",
+    "name": "vscode-kaleido-identifier",
+    "displayName": "vscode-kaleido-identifier",
     "description": "Providing highlighting of identifiers based on a hash of its name.",
     "version": "0.0.1",
     "publisher": "zjhmale",

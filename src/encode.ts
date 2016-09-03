@@ -142,14 +142,14 @@ function getBaseLog(value, base) {
   return Math.log(value) / Math.log(base);
 }
     
-function rainbowIdentifierHashBytesToUse(): number {
+function kaleidoIdentifierHashBytesToUse(): number {
     return Math.ceil(getBaseLog(Number.MAX_VALUE, 2.0) / 256.0);
 }
 
-export function rainbowIdentifierHash(identifier: string): number {
+export function kaleidoIdentifierHash(identifier: string): number {
     let sha1 = hash(identifier);
     let len = sha1.length;
-    var i = len - rainbowIdentifierHashBytesToUse()
+    var i = len - kaleidoIdentifierHashBytesToUse()
     var result = 0;
     while (i < len) {
         result = result * 256 + sha1[i].charCodeAt(0);
