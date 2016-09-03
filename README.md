@@ -6,7 +6,7 @@
 
 ## Screenshot
 
-![cleavscode-kaleido-identifier](./images/screenshot.png)
+![kaleido](http://i.imgur.com/6YJUPyV.png)
 
 ## License
 
