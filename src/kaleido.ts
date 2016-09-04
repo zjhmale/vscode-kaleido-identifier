@@ -3,7 +3,9 @@ import * as encode from './encode';
 import * as color from './color';
 
 // http://blog.ostermiller.org/find-comment
-export let singleQuote = "'.*'";
+export let singleQuote = "'\\w+'";
+export let jsSingleQuote = "'.*'";
+export let pySingleQuote = "'''(.|[\\r\\n]|)*'''";
 export let doubleQuote = "\".*\"";
 
 export let hsStyleLineComment = "-[-]+.*";
@@ -11,6 +13,7 @@ export let hsStyleMultiComment = "{-(.|[\\r\\n]|)*-}";
 
 export let lispStyleComment = ";[;]+.*";
 export let mlStyleComment = "\\(\\*(.|[\\r\\n]|)*\\*\\)";
+export let pyStyleComment = "#.*";
 
 export let cStyleLineComment = "\\/[-\\/]+.*";
 export let cStyleMultiComment = "\\/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*\\/";
