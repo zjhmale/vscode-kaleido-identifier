@@ -6,7 +6,7 @@
 
 ## Screenshot
 
-![kaleido](http://i.imgur.com/6YJUPyV.png)
+![kaleido](http://i.imgur.com/JonSbOf.png)
 
 ## License
 

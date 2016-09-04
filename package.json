@@ -2,7 +2,7 @@
     "name": "kaleido-identifier",
     "displayName": "Kaleido Identifier",
     "description": "Providing kaleido highlighting for identifiers.",
-    "version": "0.0.3",
+    "version": "0.0.6",
     "publisher": "zjhmale",
     "license": "BSD",
     "icon": "images/kaleido.png",
