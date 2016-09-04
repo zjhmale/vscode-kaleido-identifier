@@ -31,7 +31,7 @@ let ignoreRegexs = [
 ];
 
 let ignoreRegex = new RegExp([singleQuote].concat(ignoreRegexs).join("|"), "g");
-let ignoreRegexJS = new RegExp([singleQuote].concat(ignoreRegexs).join("|"), "g");
+let ignoreRegexJS = new RegExp([jsSingleQuote].concat(ignoreRegexs).join("|"), "g");
 var ignoreMatch;
 
 let identRegex = /[a-zA-Z0-9_][a-zA-Z0-9_-]*/g;
