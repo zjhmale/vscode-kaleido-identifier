@@ -5,11 +5,13 @@ import * as kaleido from '../src/kaleido';
 
 suite("Extension Tests", () => {
     test("quote regex", () => {
-        let single = new RegExp(kaleido.singleQuote, "g");
+        var single = new RegExp(kaleido.singleQuote, "g");
         let jsSingle = new RegExp(kaleido.jsSingleQuote, "g");
         let pySingle = new RegExp(kaleido.pySingleQuote, "g");
         let double = new RegExp(kaleido.doubleQuote, "g");
         assert.equal(single.exec("'cleantha'")[0], "'cleantha'");
+        single = new RegExp(kaleido.singleQuote, "g");
+        assert.equal(single.exec("'\DEL'")[0], "'\DEL'");
         assert.equal(jsSingle.exec("'./cleantha single quote!'")[0], "'./cleantha single quote!'");
         assert.equal(pySingle.exec("'''./cleantha \n single quote!'''")[0], "'''./cleantha \n single quote!'''");
         assert.equal(double.exec("\"cleantha\"")[0], "\"cleantha\"");

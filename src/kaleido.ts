@@ -3,7 +3,7 @@ import * as encode from './encode';
 import * as color from './color';
 
 // http://blog.ostermiller.org/find-comment
-export let singleQuote = "'\\w+'";
+export let singleQuote = "'\\\\?\\w+'";
 export let jsSingleQuote = "'.*'";
 export let pySingleQuote = "'''(.|[\\r\\n]|)*'''";
 export let doubleQuote = "\".*\"";
@@ -19,17 +19,19 @@ export let cStyleLineComment = "\\/[-\\/]+.*";
 export let cStyleMultiComment = "\\/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*\\/";
 
 let ignoreRegexs = [
+    pySingleQuote,
     doubleQuote,
     hsStyleLineComment,
     hsStyleMultiComment,
     lispStyleComment,
     mlStyleComment,
+    pyStyleComment,
     cStyleLineComment,
     cStyleMultiComment
 ];
 
-let ignoreRegex = new RegExp(ignoreRegexs.join("|"), "g");
-let ignoreRegexSQ = new RegExp([singleQuote].concat(ignoreRegexs).join("|"), "g");
+let ignoreRegex = new RegExp([singleQuote].concat(ignoreRegexs).join("|"), "g");
+let ignoreRegexJS = new RegExp([singleQuote].concat(ignoreRegexs).join("|"), "g");
 var ignoreMatch;
 
 let identRegex = /[a-zA-Z0-9_][a-zA-Z0-9_-]*/g;
@@ -50,7 +52,7 @@ export function kaleido(editor: vscode.TextEditor) {
 
     var text = editor.document.getText();
 
-    let regex = jsLangs.indexOf(editor.document.languageId) > -1 ? ignoreRegexSQ : ignoreRegex;
+    let regex = jsLangs.indexOf(editor.document.languageId) > -1 ? ignoreRegexJS : ignoreRegex;
 
     while (ignoreMatch = regex.exec(text)) {
         let ignore = ignoreMatch[0];
