@@ -6,7 +6,7 @@ import * as color from './color';
 export let singleQuote = "'\\\\?\\w+'";
 export let jsSingleQuote = "'.*'";
 export let pySingleQuote = "'''(.|[\\r\\n]|)*'''";
-export let doubleQuote = "\".*\"";
+export let doubleQuote = "\"([^\"])*\"";
 
 export let hsStyleLineComment = "-[-]+.*";
 export let hsStyleMultiComment = "{-(.|[\\r\\n]|)*-}";
@@ -15,19 +15,19 @@ export let lispStyleComment = ";[;]+.*";
 export let mlStyleComment = "\\(\\*(.|[\\r\\n]|)*\\*\\)";
 export let pyStyleComment = "#.*";
 
-export let cStyleLineComment = "\\/[-\\/]+.*";
+export let cStyleLineComment = "\\/[\\/]+.*";
 export let cStyleMultiComment = "\\/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*\\/";
 
 let ignoreRegexs = [
-    pySingleQuote,
-    doubleQuote,
     hsStyleLineComment,
     hsStyleMultiComment,
     lispStyleComment,
     mlStyleComment,
     pyStyleComment,
     cStyleLineComment,
-    cStyleMultiComment
+    cStyleMultiComment,
+    pySingleQuote,
+    doubleQuote
 ];
 
 let ignoreRegex = new RegExp([singleQuote].concat(ignoreRegexs).join("|"), "g");
